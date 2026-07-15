@@ -1,0 +1,72 @@
+name: Deploy Angular to Firebase
+
+on:
+  push:
+    branches:
+      - main  # Triggers the pipeline when changes are pushed to main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Generate Environment Files
+        run: |
+          # 1. Ensure the directory exists
+          mkdir -p src/environments
+
+          # 2. Generate the production config (which is environment.ts in your angular.json)
+          cat <<EOF > src/environments/environment.ts
+          export const environment = {
+              production: true,
+              firebase: {
+                  apiKey: "${{ secrets.PROD_FIREBASE_API_KEY }}",
+                  authDomain: "${{ secrets.PROD_FIREBASE_AUTH_DOMAIN }}",
+                  projectId: "${{ secrets.PROD_FIREBASE_PROJECT_ID }}",
+                  storageBucket: "${{ secrets.PROD_FIREBASE_STORAGE_BUCKET }}",
+                  messagingSenderId: "${{ secrets.PROD_FIREBASE_MESSAGING_SENDER_ID }}",
+                  appId: "${{ secrets.PROD_FIREBASE_APP_ID }}",
+                  measurementId: "${{ secrets.PROD_FIREBASE_MEASUREMENT_ID }}"
+              }
+          };
+          EOF
+
+          # 3. Create a dummy development file so the compiler doesn't fail on file replacements
+          echo "export const environment = { production: false, firebase: {} };" > src/environments/environment.development.ts
+
+      - name: Build Angular Application
+        run: npm run build
+
+      - name: Verify Build Output
+        run: ls -R dist
+
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+
+      - name: Deploy to Firebase Hosting
+        run: |
+          set +e
+          # Deploys using your Firebase Token and forces your project ID (taskapp-641a8)
+          OUTPUT=$(firebase deploy --only hosting --project taskapp-641a8 --token "${{ secrets.FIREBASE_TOKEN }}" 2>&1)
+          EXIT_CODE=$?
+          echo "$OUTPUT"
+
+          # Handle redundant identical deployments gracefully
+          if echo "$OUTPUT" | grep -q "is the current active version"; then
+            echo "Identical version detected. Ignoring redundant deployment API error."
+            exit 0
+          fi
+
+          exit $EXIT_CODE
