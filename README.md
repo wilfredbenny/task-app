@@ -4,6 +4,8 @@ A highly performant, state-of-the-art **Task Management Module** built using **A
 
 The application features a modern responsive UI supporting smooth transitions, a custom WYSIWYG rich text editor, recursive comment threads, and a custom monthly calendar scheduler.
 
+URL: https://taskapp-641a8.web.app/
+
 ---
 
 ## 🚀 Features & Architecture
