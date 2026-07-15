@@ -1,0 +1,79 @@
+[
+  {
+    "id": "task-1",
+    "title": "Design Premium Landing Page UI/UX",
+    "description": "<div>Implement a <b>state-of-the-art</b> responsive landing page dashboard utilizing the following tokens:</div><ul><li>Glassmorphism header navigation</li><li>Vibrant gradients for hero CTA</li><li>Interactive dark/light theme toggle transition</li></ul>",
+    "deadline": "2026-07-25",
+    "status": "In Progress",
+    "comments": [
+      {
+        "id": "c1",
+        "author": "Marcus Aurelius",
+        "avatar": "https://api.dicebear.com/7.x/adventurer/svg?seed=Marcus",
+        "content": "Make sure we focus heavily on the micro-animations for button hovers.",
+        "timestamp": "2026-07-14T09:30:00.000Z",
+        "replies": [
+          {
+            "id": "c2",
+            "author": "Sophia V",
+            "avatar": "https://api.dicebear.com/7.x/adventurer/svg?seed=Sophia",
+            "content": "Agreed! I will define the HSL color shifts in our global variables stylesheet.",
+            "timestamp": "2026-07-14T10:15:00.000Z",
+            "replies": [
+              {
+                "id": "c3",
+                "author": "Marcus Aurelius",
+                "avatar": "https://api.dicebear.com/7.x/adventurer/svg?seed=Marcus",
+                "content": "Awesome, that will make the theme transitions look ultra-smooth.",
+                "timestamp": "2026-07-14T11:00:00.000Z",
+                "replies": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "c4",
+        "author": "Ethan Hunt",
+        "avatar": "https://api.dicebear.com/7.x/adventurer/svg?seed=Ethan",
+        "content": "The responsive grid has been tested on mobile views and it looks perfectly aligned.",
+        "timestamp": "2026-07-15T08:00:00.000Z",
+        "replies": []
+      }
+    ]
+  },
+  {
+    "id": "task-2",
+    "title": "Set up NgRx Store and Signal Selectors",
+    "description": "<div>Configure the core state store for task operations. Ensure the following:</div><ul><li>Use <i>createReducer</i> and action actions</li><li>Convert NgRx store selections into <b>Angular Signals</b> inside components</li><li>Persist state updates to <i>localStorage</i></li></ul>",
+    "deadline": "2026-07-18",
+    "status": "Completed",
+    "comments": [
+      {
+        "id": "c5",
+        "author": "Elena Rostova",
+        "avatar": "https://api.dicebear.com/7.x/adventurer/svg?seed=Elena",
+        "content": "Should we use NgRx Effects for the mock API load?",
+        "timestamp": "2026-07-13T14:22:00.000Z",
+        "replies": [
+          {
+            "id": "c6",
+            "author": "Marcus Aurelius",
+            "avatar": "https://api.dicebear.com/7.x/adventurer/svg?seed=Marcus",
+            "content": "Yes, we should load from public/tasks.json using Angular's HttpClient and pipe the response into loadTasksSuccess action.",
+            "timestamp": "2026-07-13T14:45:00.000Z",
+            "replies": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "task-3",
+    "title": "Implement Nested Recursive Comments Component",
+    "description": "<p>Build a component that recursively calls itself to display <b>unlimited nested comment replies</b>. Use a recursive templates structure and style it to indent nicely at each level.</p>",
+    "deadline": "2026-07-29",
+    "status": "Pending",
+    "comments": []
+  }
+]

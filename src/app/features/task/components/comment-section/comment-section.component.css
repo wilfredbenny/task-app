@@ -1,0 +1,63 @@
+.comments-container {
+  padding: 1.5rem;
+  background: var(--bg-card);
+}
+
+.section-title {
+  margin-bottom: 1.25rem;
+  font-size: 1.15rem;
+  font-family: var(--font-heading);
+}
+
+.new-comment-form {
+  display: flex;
+  flex-direction: column;
+  background: rgba(226, 232, 240, 0.05);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-normal);
+}
+
+.form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.mb-none {
+  margin-bottom: 0;
+}
+
+.mt-md {
+  margin-top: 1rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.section-divider {
+  border: 0;
+  height: 1px;
+  background: var(--border-color);
+  margin: 1.5rem 0;
+}
+
+.comments-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.no-comments {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 0;
+  color: var(--text-muted);
+  gap: 1rem;
+}
+
+.no-comments p {
+  font-size: 0.9rem;
+}

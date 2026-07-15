@@ -1,0 +1,52 @@
+<div class="calendar-card glass-panel">
+  <!-- Calendar Header Controls -->
+  <div class="calendar-header">
+    <h3 class="month-title">{{ monthYearLabel() }}</h3>
+    <div class="nav-buttons">
+      <button type="button" class="btn-secondary" (click)="goToToday()">Today</button>
+      <button type="button" class="btn-icon" (click)="prevMonth()" title="Previous Month">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+        </svg>
+      </button>
+      <button type="button" class="btn-icon" (click)="nextMonth()" title="Next Month">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Days of Week -->
+  <div class="weekdays-grid">
+    <div class="weekday" *ngFor="let day of weekDays">{{ day }}</div>
+  </div>
+
+  <!-- Calendar Days Grid -->
+  <div class="days-grid">
+    <div 
+      *ngFor="let cell of calendarCells()" 
+      class="day-cell"
+      [class.outside-month]="!cell.isCurrentMonth"
+      [class.today]="cell.isToday"
+      [class.has-tasks]="cell.tasks.length > 0">
+      
+      <div class="day-number">{{ cell.date.getDate() }}</div>
+      
+      <!-- Task Badges inside cell -->
+      <div class="cell-tasks">
+        <div 
+          *ngFor="let task of cell.tasks" 
+          class="calendar-task-badge"
+          [class.completed]="task.status === 'Completed'"
+          [class.progress]="task.status === 'In Progress'"
+          [class.pending]="task.status === 'Pending'"
+          (click)="navigateToTask(task.id, $event)"
+          [title]="task.title">
+          <span class="status-indicator"></span>
+          <span class="task-title-text">{{ task.title }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

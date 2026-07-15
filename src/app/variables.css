@@ -1,0 +1,121 @@
+/* Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Theme-independent values */
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2.5rem;
+
+  --sidebar-width: 280px;
+}
+
+/* Light Theme Variables */
+:root, :root[data-theme="light"] {
+  --bg-app: #f4f6fa;
+  --bg-card: #ffffff;
+  --bg-card-hover: #fafbfc;
+  --bg-input: #f8fafc;
+  --bg-active: #e2e8f0;
+  
+  --border-color: rgba(226, 232, 240, 0.8);
+  --border-color-hover: rgba(203, 213, 225, 1);
+  
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  
+  /* Primary Indigo Palette */
+  --primary-hsl: 250, 84%, 54%;
+  --primary: hsl(var(--primary-hsl));
+  --primary-light: hsl(250, 84%, 96%);
+  --primary-dark: hsl(250, 84%, 40%);
+  --primary-glow: rgba(99, 102, 241, 0.15);
+
+  /* Status Colors */
+  --pending-hsl: 38, 92%, 50%;
+  --pending: hsl(var(--pending-hsl));
+  --pending-light: hsl(38, 92%, 95%);
+  --pending-glow: rgba(245, 158, 11, 0.15);
+
+  --progress-hsl: 200, 95%, 45%;
+  --progress: hsl(var(--progress-hsl));
+  --progress-light: hsl(200, 95%, 95%);
+  --progress-glow: rgba(14, 165, 233, 0.15);
+
+  --completed-hsl: 142, 72%, 40%;
+  --completed: hsl(var(--completed-hsl));
+  --completed-light: hsl(142, 72%, 95%);
+  --completed-glow: rgba(16, 185, 129, 0.15);
+
+  --shadow-sm: 0 2px 4px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 8px 16px -4px rgba(15, 23, 42, 0.08), 0 2px 6px -2px rgba(15, 23, 42, 0.04);
+  --shadow-lg: 0 20px 25px -5px rgba(15, 23, 42, 0.1), 0 10px 10px -5px rgba(15, 23, 42, 0.04);
+  --shadow-glow: 0 0 20px rgba(99, 102, 241, 0.15);
+
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.6);
+  --glass-blur: blur(12px);
+}
+
+/* Dark Theme Variables */
+:root[data-theme="dark"] {
+  --bg-app: #090d16;
+  --bg-card: #121824;
+  --bg-card-hover: #192132;
+  --bg-input: #1b2436;
+  --bg-active: #222e47;
+  
+  --border-color: rgba(38, 50, 77, 0.6);
+  --border-color-hover: rgba(56, 74, 115, 0.9);
+  
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  
+  /* Primary Indigo Palette */
+  --primary-hsl: 250, 89%, 65%;
+  --primary: hsl(var(--primary-hsl));
+  --primary-light: hsl(250, 40%, 15%);
+  --primary-dark: hsl(250, 89%, 75%);
+  --primary-glow: rgba(129, 140, 248, 0.2);
+
+  /* Status Colors */
+  --pending-hsl: 45, 93%, 58%;
+  --pending: hsl(var(--pending-hsl));
+  --pending-light: hsl(45, 40%, 15%);
+  --pending-glow: rgba(245, 158, 11, 0.2);
+
+  --progress-hsl: 195, 90%, 55%;
+  --progress: hsl(var(--progress-hsl));
+  --progress-light: hsl(195, 40%, 15%);
+  --progress-glow: rgba(14, 165, 233, 0.2);
+
+  --completed-hsl: 150, 84%, 48%;
+  --completed: hsl(var(--completed-hsl));
+  --completed-light: hsl(150, 40%, 12%);
+  --completed-glow: rgba(16, 185, 129, 0.2);
+
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 8px 16px -4px rgba(0, 0, 0, 0.3), 0 2px 6px -2px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+  --shadow-glow: 0 0 25px rgba(129, 140, 248, 0.25);
+
+  --glass-bg: rgba(18, 24, 36, 0.7);
+  --glass-border: rgba(38, 50, 77, 0.5);
+  --glass-blur: blur(16px);
+}
