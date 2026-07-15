@@ -1,59 +1,97 @@
-# JethurTaskManager
+# Premium Task Management Dashboard
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.19.
+A highly performant, state-of-the-art **Task Management Module** built using **Angular 21**, **NgRx Store**, and **Angular Signals**.
 
-## Development server
+The application features a modern responsive UI supporting smooth transitions, a custom WYSIWYG rich text editor, recursive comment threads, and a custom monthly calendar scheduler.
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
+## 🚀 Features & Architecture
+
+```mermaid
+graph TD
+    A[AppComponent Shell] --> B[TaskListPage]
+    A --> C[TaskDetailsPage]
+    A --> D[TaskFormPage]
+    
+    B --> E[CalendarViewComponent]
+    C --> F[CommentSectionComponent]
+    F --> G[CommentItemComponent - Recursive]
+    D --> H[RichTextEditorComponent - CVA]
+    
+    I[TaskService - Signals Provider] --> |Dispatch Actions| J[NgRx Store]
+    J --> |Select State as Signals| I
+    
+    K[TaskEffects] --> |Hydrate / Sync| L[(LocalStorage)]
+    K --> |Initial Load| M[HttpClient - tasks.json]
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### 1. Unified State & Signals Bridge (`TaskService`)
+We implemented a hybrid state approach linking the robust reliability of **NgRx Store** with the lightning-fast reactivity of **Angular Signals**:
+- **Store**: Standard Actions, Reducer map, and Side Effects serialize state dynamically to `localStorage`.
+- **Signals**: Instead of exposing RxJS observables directly in components, the `TaskService` converts selectors to read-only Angular Signals using `store.selectSignal(selector)`. This enables optimal Angular zoneless performance and clean template syntax (`service.tasks()`).
 
-## Code scaffolding
+### 2. Custom Rich Text Editor (`ControlValueAccessor`)
+Rather than relying on bloated external WYSIWYG editor packages which frequently break during peer dependency resolution on new Angular releases (like v21), we built a native **Rich Text Editor Component** implementing `NG_VALUE_ACCESSOR`. It supports:
+- Rich format toggles: **Bold**, *Italic*, <u>Underline</u>, and Unordered Bullet Lists.
+- Seamless bindings to Angular **Reactive Forms** using `formControlName="description"`.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### 3. Recursive Comment Threads (Unlimited Nesting)
+The comments section supports unlimited nested replies utilizing a clean self-recursive tree architecture:
+- `CommentSectionComponent` manages the root-level comments form and lists the threads.
+- `CommentItemComponent` renders a comment card, a toggleable inline reply box, and recursively spawns `<app-comment-item>` elements for nested children.
+- Comment additions are dispatched to the NgRx store which updates the comment node tree in an immutable, pure functional reducer.
 
+### 4. Custom monthly Calendar Grid
+An interactive calendar grid built completely using **CSS Grid** and **Angular Signals**:
+- Calculates previous and next month date paddings to maintain a clean 6-row (42-day) monthly cell grid.
+- Filters and overlays task badges onto their corresponding deadline dates, color-coded by status (Green: Completed, Blue: In Progress, Amber: Pending).
+- Clicking any badge instantly navigates the user to the respective Task Details inspector.
+- Collapses into status dots on mobile viewports for clean responsive design.
+
+### 5. Premium Styling (`variables.css`)
+- **Theme Switcher**: Supported by a toggle widget. Writes user choice to `localStorage` and falls back to browser/OS `prefers-color-scheme`.
+- **Glassmorphism**: Elegant card borders, backdrops, and box shadows.
+- **Responsiveness**: Re-arranges the app layouts from side-by-side grids on desktops to single column tabs/drawers on mobile viewports.
+
+---
+
+## 🛠️ Project Setup & Installation
+
+### Prerequisite Node.js version
+This Angular CLI version requires a minimum Node.js version of `v22.22.3`, `v24.15.0`, or `>=v26.0.0`. Please ensure your environment complies.
+
+### Step 1: Install Dependencies
+Navigate to the root directory and run:
 ```bash
-ng generate component component-name
+npm install --legacy-peer-deps
+```
+*(Note: `--legacy-peer-deps` is recommended when installing store packages under Angular 21 to resolve peer requirements smoothly).*
+
+### Step 2: Start Development Server
+```bash
+npm run dev
+# OR
+npx ng serve
+```
+Open [http://localhost:4200/](http://localhost:4200/) in your browser.
+
+### Step 3: Run Build (Verify Compilation)
+```bash
+npm run build
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## 📦 Packages Used
+- **`@angular/core`** (v21.2.0) - Core platform.
+- **`@ngrx/store`** (v19.0.1) - NgRx State reducer management.
+- **`@ngrx/effects`** (v19.0.1) - Side-effect task loading handlers.
+- **`@ngrx/store-devtools`** (v19.0.1) - Store debugging capabilities.
 
-## Building
+---
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 📝 Assumptions Made
+1. **Local State & Storage Persistence**: Since the functional requirements mention that comments/updates may be stored locally and database persistence isn't required, we store modifications in the NgRx store and synchronize them with `localStorage`. This prevents data from being lost upon reloading the page.
+2. **Initial Seed**: If `localStorage` is empty, an initial seed of 3 feature-rich tasks is fetched from `public/tasks.json` via HttpClient.
+3. **Icons**: Inline SVG paths are used throughout to make components self-contained, light, and independent of external CSS-based icon fonts.

@@ -2,11 +2,12 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "npm"
+    "packageManager": "npm",
+    "analytics": false
   },
   "newProjectRoot": "projects",
   "projects": {
-    "jethur-task-manager": {
+    "task-manager": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -52,9 +53,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "src/styles.css"
-            ]
+            "styles": ["src/styles.css"]
           },
           "configurations": {
             "production": {
@@ -84,10 +83,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "jethur-task-manager:build:production"
+              "buildTarget": "task-manager:build:production"
             },
             "development": {
-              "buildTarget": "jethur-task-manager:build:development"
+              "buildTarget": "task-manager:build:development"
             }
           },
           "defaultConfiguration": "development"

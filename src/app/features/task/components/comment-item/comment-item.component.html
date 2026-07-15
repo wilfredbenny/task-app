@@ -1,0 +1,75 @@
+<div class="comment-wrapper">
+  <div class="comment-card">
+    <!-- Avatar -->
+    <img 
+      [src]="avatarUrl()" 
+      [alt]="comment().author" 
+      class="comment-avatar" />
+
+    <div class="comment-body">
+      <div class="comment-meta">
+        <span class="comment-author">{{ comment().author }}</span>
+        <span class="comment-time">{{ comment().timestamp | date:'short' }}</span>
+      </div>
+      <div class="comment-content">
+        {{ comment().content }}
+      </div>
+      
+      <div class="comment-actions">
+        <button 
+          type="button" 
+          class="reply-toggle-btn" 
+          (click)="toggleReplyForm()">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+            <path d="M10 9V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11z"/>
+          </svg>
+          Reply
+        </button>
+      </div>
+
+      <!-- Reply form (inline) -->
+      <div class="reply-form glass-panel" *ngIf="showReplyForm()">
+        <div class="reply-form-row">
+          <input 
+            type="text" 
+            class="form-control text-sm" 
+            placeholder="Your Name" 
+            [(ngModel)]="replyAuthor" 
+            required />
+        </div>
+        <div class="reply-form-row mt-sm">
+          <textarea 
+            class="form-control text-sm" 
+            placeholder="Write a reply..." 
+            rows="2"
+            [(ngModel)]="replyContent" 
+            required></textarea>
+        </div>
+        <div class="reply-form-actions mt-sm">
+          <button 
+            type="button" 
+            class="btn-secondary btn-sm" 
+            (click)="toggleReplyForm()">
+            Cancel
+          </button>
+          <button 
+            type="button" 
+            class="btn-primary btn-sm" 
+            [disabled]="!replyAuthor().trim() || !replyContent().trim()"
+            (click)="submitReply()">
+            Post Reply
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recursive Child Comments -->
+  <div class="nested-replies" *ngIf="comment().replies.length > 0">
+    <app-comment-item 
+      *ngFor="let childComment of comment().replies" 
+      [comment]="childComment" 
+      [taskId]="taskId()">
+    </app-comment-item>
+  </div>
+</div>

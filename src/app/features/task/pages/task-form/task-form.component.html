@@ -1,0 +1,84 @@
+<div class="page-container small-width">
+  <div class="form-header glass-panel">
+    <div class="flex-align">
+      <button type="button" routerLink="/tasks" class="btn-icon mr-md" title="Back to Dashboard">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+        </svg>
+      </button>
+      <h2>{{ isEditMode() ? 'Edit Task Details' : 'Create New Task' }}</h2>
+    </div>
+  </div>
+
+  <div *ngIf="errorMessage()" class="error-message err-msg glass-panel p-md mt-lg">
+    <span>{{ errorMessage() }}</span>
+    <button type="button" (click)="errorMessage.set(null)" style="background: none; border: none; color: inherit; cursor: pointer; font-weight: bold; font-size: 1.1rem;">✕</button>
+  </div>
+
+  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="task-form-card glass-panel mt-lg">
+    <div class="form-group">
+      <label for="task-title">Task Title</label>
+      <input 
+        type="text" 
+        id="task-title"
+        formControlName="title" 
+        class="form-control"
+        [class.invalid]="isFieldInvalid('title')"
+        placeholder="e.g. Establish Brand Design Guidelines" />
+      <div class="error-message" *ngIf="isFieldInvalid('title')">
+        <span *ngIf="taskForm.get('title')?.hasError('required')">Title is required.</span>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group flex-1">
+        <label for="task-deadline">Deadline Date</label>
+        <input 
+          type="date" 
+          id="task-deadline"
+          formControlName="deadline" 
+          class="form-control"
+          [class.invalid]="isFieldInvalid('deadline')" />
+        <div class="error-message" *ngIf="isFieldInvalid('deadline')">
+          <span *ngIf="taskForm.get('deadline')?.hasError('required')">Deadline is required.</span>
+          <span *ngIf="taskForm.get('deadline')?.hasError('pastDate')">Deadline cannot be set in the past.</span>
+          <span *ngIf="taskForm.get('deadline')?.hasError('invalidDate')">Selected date is invalid.</span>
+        </div>
+      </div>
+
+      <div class="form-group flex-1">
+        <label for="task-status">Current Status</label>
+        <select 
+          id="task-status"
+          formControlName="status" 
+          class="form-control select-control"
+          [class.invalid]="isFieldInvalid('status')">
+          <option value="Pending">Pending</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Completed">Completed</option>
+        </select>
+        <div class="error-message" *ngIf="isFieldInvalid('status')">
+          <span *ngIf="taskForm.get('status')?.hasError('required')">Status selection is required.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Task Description</label>
+      <app-rich-text-editor 
+        formControlName="description"
+        [class.invalid]="isFieldInvalid('description')"></app-rich-text-editor>
+      <div class="error-message" *ngIf="isFieldInvalid('description') || (taskForm.get('description')?.touched && errorMessage()?.includes('Description'))">
+        <span *ngIf="taskForm.get('description')?.hasError('required') || errorMessage()?.includes('Description')">Description content is required.</span>
+      </div>
+    </div>
+
+    <div class="form-buttons mt-xl">
+      <button type="button" routerLink="/tasks" class="btn-secondary">Cancel</button>
+      
+      <button type="submit" class="btn-primary">
+        {{ isEditMode() ? 'Save Changes' : 'Create Task' }}
+      </button>
+    </div>
+  </form>
+</div>

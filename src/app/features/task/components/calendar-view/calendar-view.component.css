@@ -1,0 +1,194 @@
+.calendar-card {
+  padding: 1.5rem;
+  background: var(--bg-card);
+  margin-bottom: 2rem;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.month-title {
+  font-size: 1.3rem;
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.weekdays-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.weekday {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-auto-rows: minmax(100px, auto);
+  gap: 1px;
+  background: var(--border-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.day-cell {
+  background: var(--bg-card);
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: background-color var(--transition-fast);
+  position: relative;
+}
+
+.day-cell:hover {
+  background: var(--bg-card-hover);
+}
+
+.day-cell.outside-month {
+  background: rgba(226, 232, 240, 0.1);
+}
+:root[data-theme="dark"] .day-cell.outside-month {
+  background: rgba(18, 24, 36, 0.4);
+}
+
+.day-cell.outside-month .day-number {
+  color: var(--text-muted);
+}
+
+.day-number {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+}
+
+.day-cell.today .day-number {
+  background: var(--primary);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.cell-tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  overflow-y: auto;
+  max-height: 80px;
+}
+
+/* Small task item inside calendar cell */
+.calendar-task-badge {
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 0.2rem 0.4rem;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: transform var(--transition-fast);
+}
+
+.calendar-task-badge:hover {
+  transform: scale(1.02);
+}
+
+.calendar-task-badge.completed {
+  background: var(--completed-light);
+  color: var(--completed);
+}
+.calendar-task-badge.completed .status-indicator {
+  background: var(--completed);
+}
+
+.calendar-task-badge.progress {
+  background: var(--progress-light);
+  color: var(--progress);
+}
+.calendar-task-badge.progress .status-indicator {
+  background: var(--progress);
+}
+
+.calendar-task-badge.pending {
+  background: var(--pending-light);
+  color: var(--pending);
+}
+.calendar-task-badge.pending .status-indicator {
+  background: var(--pending);
+}
+
+.status-indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.task-title-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Responsive Mobile styles for Calendar Grid */
+@media (max-width: 768px) {
+  .days-grid {
+    grid-auto-rows: minmax(70px, auto);
+  }
+  
+  .calendar-task-badge {
+    padding: 0.15rem 0.25rem;
+  }
+  
+  .task-title-text {
+    display: none; /* Hide text on small screens, show dots */
+  }
+  
+  .calendar-task-badge {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    padding: 0;
+    justify-content: center;
+  }
+  
+  .status-indicator {
+    margin: 0;
+  }
+  
+  .cell-tasks {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.2rem;
+  }
+}
