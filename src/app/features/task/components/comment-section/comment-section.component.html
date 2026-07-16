@@ -1,9 +1,8 @@
-<div class="comments-container glass-panel">
+<div class="comments-container">
   <h3 class="section-title">
     Comments ({{ totalCommentsCount() }})
   </h3>
 
-  <!-- New Comment Form -->
   <div class="new-comment-form">
     <div class="form-grid">
       <div class="form-group mb-none">
@@ -38,10 +37,8 @@
     </div>
   </div>
 
-  <!-- Divider -->
   <hr class="section-divider" *ngIf="comments().length > 0" />
 
-  <!-- Comments List -->
   <div class="comments-list">
     <app-comment-item 
       *ngFor="let comment of comments()" 

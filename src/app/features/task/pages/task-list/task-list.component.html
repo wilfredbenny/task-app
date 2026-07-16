@@ -1,22 +1,21 @@
 <div class="page-container">
-  <!-- Top Action Bar -->
-  <div class="list-header glass-panel">
+  
+  <div class="list-header">
     <div>
       <h2>Task Dashboard</h2>
       <p class="subtitle">Organize, track, and complete your projects.</p>
     </div>
     <button type="button" routerLink="/tasks/new" class="btn-primary">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
         <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
       </svg>
       Add New Task
     </button>
   </div>
 
-  <!-- Filters & Toggles -->
-  <div class="filters-bar glass-panel">
+  <div class="filters-bar">
     <div class="search-container">
-      <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+      <svg class="search-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
         <circle cx="11" cy="11" r="8"></circle>
         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
       </svg>
@@ -28,7 +27,6 @@
     </div>
 
     <div class="filter-controls">
-      <!-- Status Filters -->
       <div class="filter-group">
         <button 
           *ngFor="let filter of statusFilters" 
@@ -40,7 +38,6 @@
         </button>
       </div>
 
-      <!-- View Toggle -->
       <div class="view-toggle-group">
         <button 
           type="button" 
@@ -62,28 +59,21 @@
     </div>
   </div>
 
-  <!-- Loading State -->
   <div class="loading-state" *ngIf="taskService.loading()">
     <div class="spinner"></div>
     <p>Syncing task workspace...</p>
   </div>
 
-  <!-- Error State -->
-  <div class="error-state glass-panel" *ngIf="taskService.error()">
+  <div class="error-state" *ngIf="taskService.error()">
     <p>Something went wrong: {{ taskService.error() }}</p>
   </div>
 
-  <!-- Main Display -->
   <div class="display-container" *ngIf="!taskService.loading() && !taskService.error()">
-    <!-- LIST VIEW -->
     <ng-container *ngIf="viewMode() === 'list'">
       <div class="task-grid" *ngIf="filteredTasks().length > 0">
         <div 
           *ngFor="let task of filteredTasks()" 
-          class="task-card glass-panel"
-          [class.border-completed]="task.status === 'Completed'"
-          [class.border-progress]="task.status === 'In Progress'"
-          [class.border-pending]="task.status === 'Pending'">
+          class="task-card">
           
           <div class="card-header">
             <span 
@@ -91,18 +81,19 @@
               [class.badge-completed]="task.status === 'Completed'"
               [class.badge-progress]="task.status === 'In Progress'"
               [class.badge-pending]="task.status === 'Pending'">
+              <span class="status-dot"></span>
               {{ task.status }}
             </span>
             
             <div class="card-actions">
               <button type="button" [routerLink]="['/tasks', task.id, 'edit']" class="action-btn" title="Edit Task">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
                   <path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
                 </svg>
               </button>
               <button type="button" (click)="deleteTask(task.id)" class="action-btn delete" title="Delete Task">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
                   <polyline points="3 6 5 6 21 6"></polyline>
                   <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
                 </svg>
@@ -136,8 +127,8 @@
         </div>
       </div>
 
-      <div class="empty-state glass-panel" *ngIf="filteredTasks().length === 0">
-        <svg viewBox="0 0 24 24" width="64" height="64" fill="none" stroke="currentColor" stroke-width="1.5">
+      <div class="empty-state" *ngIf="filteredTasks().length === 0">
+        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5.586a1 1 0 0 1 .707.293l5.414 5.414a1 1 0 0 1 .293.707V19a2 2 0 0 1-2 2Z" />
         </svg>
         <h3>No tasks found</h3>
@@ -145,7 +136,6 @@
       </div>
     </ng-container>
 
-    <!-- CALENDAR VIEW -->
     <ng-container *ngIf="viewMode() === 'calendar'">
       <app-calendar-view [tasks]="filteredTasks()"></app-calendar-view>
     </ng-container>

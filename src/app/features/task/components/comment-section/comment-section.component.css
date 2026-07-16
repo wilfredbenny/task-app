@@ -1,20 +1,26 @@
 .comments-container {
   padding: 1.5rem;
   background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
 }
 
 .section-title {
   margin-bottom: 1.25rem;
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-family: var(--font-heading);
 }
 
 .new-comment-form {
   display: flex;
   flex-direction: column;
-  background: rgba(226, 232, 240, 0.05);
-  border-radius: var(--radius-md);
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 6px;
   transition: all var(--transition-normal);
+}
+
+:root[data-theme="dark"] .new-comment-form {
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .form-grid {
@@ -53,11 +59,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 3rem 0;
+  padding: 2.5rem 0;
   color: var(--text-muted);
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .no-comments p {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }

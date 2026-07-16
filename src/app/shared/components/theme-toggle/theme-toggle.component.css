@@ -2,23 +2,21 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem 1rem;
+  padding: 0.4rem 0.8rem;
   border: 1px solid var(--border-color);
   color: var(--text-primary);
   background: var(--bg-card);
   cursor: pointer;
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 0.82rem;
+  font-weight: 500;
   transition: all var(--transition-normal);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.02);
 }
 
 .theme-toggle-btn:hover {
   background: var(--bg-card-hover);
   border-color: var(--border-color-hover);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
 }
 
 .theme-toggle-btn svg {
@@ -27,6 +25,6 @@
 }
 
 .theme-toggle-btn:hover svg {
-  transform: rotate(15deg);
+  transform: rotate(10deg);
   color: var(--text-primary);
 }

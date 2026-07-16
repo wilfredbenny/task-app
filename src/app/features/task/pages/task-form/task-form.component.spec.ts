@@ -25,7 +25,7 @@ describe('TaskFormComponent', () => {
 
   beforeEach(async () => {
     mockTaskService = {
-      addTask: vi.fn(),
+      addTask: vi.fn().mockReturnValue(true),
       updateTask: vi.fn(),
       loadTasks: vi.fn(),
       getTaskById: vi.fn().mockReturnValue(signal(null)),

@@ -5,7 +5,7 @@
 
 .editor-container {
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
+  border-radius: 6px;
   background: var(--bg-input);
   transition: all var(--transition-normal);
   overflow: hidden;
@@ -14,7 +14,7 @@
 .editor-container.focused {
   border-color: var(--primary);
   background: var(--bg-card);
-  box-shadow: 0 0 0 3px var(--primary-glow);
+  box-shadow: 0 0 0 2px var(--primary-light);
 }
 
 .editor-container.disabled {
@@ -25,16 +25,16 @@
 .editor-toolbar {
   display: flex;
   gap: 0.25rem;
-  padding: 0.5rem;
+  padding: 0.4rem;
   background: var(--bg-card);
   border-bottom: 1px solid var(--border-color);
   align-items: center;
 }
 
 .toolbar-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: var(--radius-sm);
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -56,18 +56,17 @@
 }
 
 .editor-content {
-  min-height: 150px;
-  padding: 1rem;
+  min-height: 120px;
+  padding: 0.75rem;
   outline: none;
   color: var(--text-primary);
   font-family: var(--font-body);
-  font-size: 0.95rem;
-  line-height: 1.6;
+  font-size: 0.9rem;
+  line-height: 1.5;
   background: transparent;
 }
 
-/* List style resets in rich text editor */
 .editor-content ul {
-  padding-left: 1.5rem;
-  margin-bottom: 1rem;
+  padding-left: 1.25rem;
+  margin-bottom: 0.75rem;
 }

@@ -12,4 +12,13 @@ import { ThemeToggleComponent } from './shared/components/theme-toggle/theme-tog
 })
 export class AppComponent {
   readonly title = signal('Task Manager');
+  readonly isSidebarOpen = signal(false);
+
+  toggleSidebar(): void {
+    this.isSidebarOpen.update(v => !v);
+  }
+
+  closeSidebar(): void {
+    this.isSidebarOpen.set(false);
+  }
 }

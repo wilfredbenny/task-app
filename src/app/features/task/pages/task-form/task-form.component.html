@@ -1,5 +1,6 @@
 <div class="page-container small-width">
-  <div class="form-header glass-panel">
+  
+  <div class="form-header">
     <div class="flex-align">
       <button type="button" routerLink="/tasks" class="btn-icon mr-md" title="Back to Dashboard">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
@@ -10,12 +11,13 @@
     </div>
   </div>
 
-  <div *ngIf="errorMessage()" class="error-message err-msg glass-panel p-md mt-lg">
+  <div *ngIf="errorMessage()" class="error-message-banner">
     <span>{{ errorMessage() }}</span>
-    <button type="button" (click)="errorMessage.set(null)" style="background: none; border: none; color: inherit; cursor: pointer; font-weight: bold; font-size: 1.1rem;">✕</button>
+    <button type="button" class="close-banner" (click)="errorMessage.set(null)">✕</button>
   </div>
 
-  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="task-form-card glass-panel mt-lg">
+  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="task-form-card mt-lg">
+    
     <div class="form-group">
       <label for="task-title">Task Title</label>
       <input 
@@ -75,10 +77,10 @@
 
     <div class="form-buttons mt-xl">
       <button type="button" routerLink="/tasks" class="btn-secondary">Cancel</button>
-      
       <button type="submit" class="btn-primary">
         {{ isEditMode() ? 'Save Changes' : 'Create Task' }}
       </button>
     </div>
+
   </form>
 </div>
