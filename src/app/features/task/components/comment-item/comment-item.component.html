@@ -1,6 +1,5 @@
 <div class="comment-wrapper">
   <div class="comment-card">
-    <!-- Avatar -->
     <img 
       [src]="avatarUrl()" 
       [alt]="comment().author" 
@@ -27,8 +26,7 @@
         </button>
       </div>
 
-      <!-- Reply form (inline) -->
-      <div class="reply-form glass-panel" *ngIf="showReplyForm()">
+      <div class="reply-form" *ngIf="showReplyForm()">
         <div class="reply-form-row">
           <input 
             type="text" 
@@ -64,7 +62,6 @@
     </div>
   </div>
 
-  <!-- Recursive Child Comments -->
   <div class="nested-replies" *ngIf="comment().replies.length > 0">
     <app-comment-item 
       *ngFor="let childComment of comment().replies" 

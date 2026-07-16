@@ -1,6 +1,8 @@
 .calendar-card {
   padding: 1.5rem;
   background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
   margin-bottom: 2rem;
 }
 
@@ -12,7 +14,7 @@
 }
 
 .month-title {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-family: var(--font-heading);
   color: var(--text-primary);
 }
@@ -27,10 +29,10 @@
   grid-template-columns: repeat(7, 1fr);
   text-align: center;
   font-weight: 600;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: var(--text-secondary);
   border-bottom: 1px solid var(--border-color);
-  padding-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
   margin-bottom: 0.5rem;
 }
 
@@ -42,20 +44,20 @@
 .days-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-auto-rows: minmax(100px, auto);
+  grid-auto-rows: minmax(90px, auto);
   gap: 1px;
   background: var(--border-color);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
+  border-radius: 6px;
   overflow: hidden;
 }
 
 .day-cell {
   background: var(--bg-card);
-  padding: 0.5rem;
+  padding: 0.4rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.4rem;
   transition: background-color var(--transition-fast);
   position: relative;
 }
@@ -65,10 +67,11 @@
 }
 
 .day-cell.outside-month {
-  background: rgba(226, 232, 240, 0.1);
+  background: rgba(0, 0, 0, 0.02);
 }
+
 :root[data-theme="dark"] .day-cell.outside-month {
-  background: rgba(18, 24, 36, 0.4);
+  background: rgba(255, 255, 255, 0.02);
 }
 
 .day-cell.outside-month .day-number {
@@ -78,10 +81,10 @@
 .day-number {
   font-family: var(--font-heading);
   font-weight: 500;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--text-primary);
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -97,35 +100,36 @@
 .cell-tasks {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.2rem;
   overflow-y: auto;
-  max-height: 80px;
+  max-height: 70px;
 }
 
-/* Small task item inside calendar cell */
 .calendar-task-badge {
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 500;
-  padding: 0.2rem 0.4rem;
-  border-radius: var(--radius-sm);
+  padding: 0.15rem 0.35rem;
+  border-radius: 3px;
   display: flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: 0.25rem;
   cursor: pointer;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  transition: transform var(--transition-fast);
+  transition: opacity var(--transition-fast);
 }
 
 .calendar-task-badge:hover {
-  transform: scale(1.02);
+  opacity: 0.8;
 }
 
 .calendar-task-badge.completed {
   background: var(--completed-light);
   color: var(--completed);
+  border: 1px solid rgba(52, 199, 89, 0.15);
 }
+
 .calendar-task-badge.completed .status-indicator {
   background: var(--completed);
 }
@@ -133,7 +137,9 @@
 .calendar-task-badge.progress {
   background: var(--progress-light);
   color: var(--progress);
+  border: 1px solid rgba(0, 162, 255, 0.15);
 }
+
 .calendar-task-badge.progress .status-indicator {
   background: var(--progress);
 }
@@ -141,14 +147,16 @@
 .calendar-task-badge.pending {
   background: var(--pending-light);
   color: var(--pending);
+  border: 1px solid rgba(255, 149, 0, 0.15);
 }
+
 .calendar-task-badge.pending .status-indicator {
   background: var(--pending);
 }
 
 .status-indicator {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   flex-shrink: 0;
 }
@@ -159,29 +167,30 @@
   white-space: nowrap;
 }
 
-/* Responsive Mobile styles for Calendar Grid */
 @media (max-width: 768px) {
   .days-grid {
-    grid-auto-rows: minmax(70px, auto);
+    grid-auto-rows: minmax(50px, auto);
   }
   
   .calendar-task-badge {
-    padding: 0.15rem 0.25rem;
+    padding: 0;
   }
   
   .task-title-text {
-    display: none; /* Hide text on small screens, show dots */
+    display: none;
   }
   
   .calendar-task-badge {
-    width: 12px;
-    height: 12px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
-    padding: 0;
     justify-content: center;
+    border: none;
   }
   
   .status-indicator {
+    width: 6px;
+    height: 6px;
     margin: 0;
   }
   
@@ -189,6 +198,6 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 0.2rem;
+    gap: 0.15rem;
   }
 }

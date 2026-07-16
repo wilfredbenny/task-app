@@ -10,7 +10,7 @@
   padding: 0.75rem;
   background: var(--bg-card);
   border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
+  border-radius: 6px;
   transition: border-color var(--transition-fast);
 }
 
@@ -19,8 +19,8 @@
 }
 
 .comment-avatar {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: var(--radius-full);
   background: var(--bg-active);
   flex-shrink: 0;
@@ -41,19 +41,19 @@
 
 .comment-author {
   font-weight: 600;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   color: var(--text-primary);
 }
 
 .comment-time {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   color: var(--text-muted);
 }
 
 .comment-content {
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   color: var(--text-secondary);
-  line-height: 1.5;
+  line-height: 1.45;
   white-space: pre-wrap;
 }
 
@@ -64,11 +64,11 @@
 }
 
 .reply-toggle-btn {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 600;
   color: var(--primary);
   gap: 0.25rem;
-  padding: 0.25rem 0.5rem;
+  padding: 0.2rem 0.4rem;
   border-radius: var(--radius-sm);
 }
 
@@ -76,12 +76,12 @@
   background: var(--primary-light);
 }
 
-/* Reply Form styles */
 .reply-form {
   margin-top: 0.75rem;
   padding: 0.75rem;
   background: var(--bg-card-hover);
   border: 1px solid var(--border-color);
+  border-radius: 6px;
 }
 
 .reply-form-row {
@@ -89,8 +89,8 @@
 }
 
 .text-sm {
-  font-size: 0.8rem;
-  padding: 0.5rem 0.75rem;
+  font-size: 0.78rem;
+  padding: 0.4rem 0.6rem;
 }
 
 .mt-sm {
@@ -104,16 +104,15 @@
 }
 
 .btn-sm {
-  font-size: 0.75rem;
-  padding: 0.35rem 0.75rem;
+  font-size: 0.72rem;
+  padding: 0.3rem 0.6rem;
   border-radius: var(--radius-sm);
 }
 
-/* Indented replies list styling */
 .nested-replies {
-  margin-left: 1.5rem;
+  margin-left: 1.25rem;
   padding-left: 0.75rem;
-  border-left: 2px dashed var(--border-color);
+  border-left: 1px solid var(--border-color);
 }
 
 @media (max-width: 768px) {
